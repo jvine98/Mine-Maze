@@ -1,5 +1,8 @@
-// CIS150_MineMaze.cpp : Defines the entry point for the console application.
-//
+//=================================================================================================================================
+//Group Name: Mine Maze
+//Desc: A player will have to get one from side of the room to the other with a limited amount of moves per turn and amount of
+//		lives per level
+//=================================================================================================================================
 
 #include "stdafx.h"
 #include <iostream>
