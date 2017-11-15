@@ -22,10 +22,13 @@ void displayStartup() {
 	cout << "======================================================================================================================" << endl;
 }
 void MediumMapCode();
+void MedUp(int, int, string map[16][16]);
+void MedDown(int, int, string map [16][16]);
+void MedLeft(int, int, string map[16][16]);
+void MedRight(int ,int, string map[16][16]);
 
 int main()
 {
-
 
 	// ======================================
 	// Map variables
@@ -40,12 +43,11 @@ int main()
 	// ======================================
 	int lives; // Placeholder for later, will depend on the level.
 	int moves; // Placeholder for later, limited amount of moves depending on the level.
+	int selection;
 
 	// Start up menu;
 	displayStartup();
 
-	// selection variable
-	int selection;
 	//Intro to the game
 	cout << "Hello welcome to The Mine Maze\n";
 	cout << "Select the Level you want to Play\n";
@@ -71,25 +73,27 @@ void MediumMapCode()
 {
 
 	// Map for the medium level
-	const int medrow = 17, medcolm = 17;
-	string medmap[medrow][medrow] = {
-		{ " ","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p" },
-		{ "a", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " "," "," " },
-		{ "b", " ", " ", "-", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ","|"," " },
-		{ "c", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ","|"," " },
-		{ "d", "-", "-", " ", " ", " ", "|", " ", " ", " ", "-", "-", "-", " ","|"," " },
-		{ "e", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " "," "," " },
-		{ "f", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " "," "," " },
-		{ "g", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " "," "," " },
-		{ "h", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " ", " "," "," " },
-		{ "i", "-", "-", "|", " ", "-", "-", "-", " ", "|", " ", " ", " ", " "," "," " },
-		{ "j", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "," "," " },
-		{ "k", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", " "," "," " },
-		{ "l", " ", " ", " ", " ", "-", "-", "-", "-", " ", " ", " ", " ", "|"," "," " },
-		{ "m", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", " ", " ", " "," "," " },
-		{ "n", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", "-"," "," " },
-		{ "o", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"," "," " },
-		{ "p", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"," "," " },
+	char select;
+	int lastrow = 1;
+	int lastcol = 1;
+	const int medrow = 16, medcolm = 16;
+	string medmap[medrow][medcolm] = {
+		{ " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" ,"n", "o" },
+		{ "a", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", " ", " " },
+		{ "b", " ", " ", "-", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", "|", " " },
+		{ "c", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " " },
+		{ "d", "-", "-", " ", " ", " ", "|", " ", " ", " ", "-", "-", "-", " ", "|", " " },
+		{ "e", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " " },
+		{ "f", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " " },
+		{ "g", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " " },
+		{ "h", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", " " },
+		{ "i", "-", "-", "|", " ", "-", "-", "-", " ", "|", " ", " ", " ", " ", " ", " " },
+		{ "j", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+		{ "k", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", " ", " ", " " },
+		{ "l", " ", " ", " ", " ", "-", "-", "-", "-", " ", " ", " ", " ", "|", " ", " " },
+		{ "m", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+		{ "n", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", "-", " ", " " },
+		{ "o", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " " },
 
 	};
 
@@ -107,48 +111,14 @@ void MediumMapCode()
 	cout << endl;
 	//The Medium Maze
 
-	for (int row = 0; row < 17; row++)
+	for (int row = 0; row < 16; row++)
 	{
-		for (int col = 0; col < 17; col++)
+		for (int col = 0; col < 16; col++)
 		{
-			cout << medmap[row][col] << " ";
-
-		}
-		cout << endl;
-
-	}
-
-	// moving one spot
-	char rowmove;
-	char colmove;
-	cout << "Move your player 1 spot\n";
-	cout << "Enter the row you would like to move to: ";
-	cin >> rowmove;
-	cout << "Enter the column you would like to move to: ";
-	cin >> colmove;
-	int rownum, colnum;
-	// converting char to an int
-	if (rowmove >= 'a' && rowmove <= 'z')
-	{
-		// the ascii value for a is 97 but subrtracted by 96 becaucse of the postion in the array
-		rownum = rowmove - 96;
-	}
-	if (colmove >= 'a' && colmove <= 'z')
-	{
-		// the ascii value for a is 97 but i subrtacted by 96 because of the postion in the array
-		colnum = colmove - 96;
-	}
-
-	//placing the player at a postion
-	for (int row = 0; row < 17; row++)
-	{
-		for (int col = 0; col < 17; col++)
-		{
-			if (colnum == col && rownum == row)
+			if (col == 1 && row == 1)
 			{
-				medmap[row][col] = "x";
-				cout << medmap[row][col] << " ";
-
+				medmap[1][1] = "x";
+				cout << medmap[1][1];
 			}
 			else
 			{
@@ -157,6 +127,52 @@ void MediumMapCode()
 
 		}
 		cout << endl;
+
 	}
+	
+
+	// first move
+	cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
+	cin >> select;
+	if (select == 'd')
+	{
+		medmap[lastrow][lastcol] = " ";
+		system("cls");
+		MedDown(lastrow, lastcol, medmap);
+		lastrow = 2;
+
+	}
+
+	
+}
+void MedUp(int row, int col, string map[16][16])
+{
+	string let = "x";
+	map[row - 1][col] = let;
+}
+void MedDown(int row, int col, string map[16][16])
+{
+	
+	string let = "x";
+	map[row + 1][col] = let;
+	for (int i = 0; i < 16; i++)
+	{
+		for (int a = 0; a < 16; a++)
+		{
+			cout << map[i][a] << " ";
+		}
+		cout << endl;
+	}
+}
+void MedLeft(int row, int col, string map[16][16])
+{
+	string let = "x";
+	map[row][col - 1] = let;
+
+}
+void MedRight(int row, int col, string map[16][16])
+{
+	string let = "x";
+	map[row][col + 1] = let;
 
 }
