@@ -7,6 +7,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <string>
+#include <conio.h> // For player movement input
 using namespace std;
 
 
@@ -21,11 +22,14 @@ void displayStartup() {
 	cout << endl;
 	cout << "======================================================================================================================" << endl;
 }
+void easyMapCode();
 void MediumMapCode();
 void MedUp(int, int, string map[16][16]);
 void MedDown(int, int, string map [16][16]);
 void MedLeft(int, int, string map[16][16]);
 void MedRight(int ,int, string map[16][16]);
+
+void clear();
 
 int main()
 {
@@ -59,13 +63,81 @@ int main()
 	// CIN THE SELECTION
 	cin >> selection;
 	cout << endl;
-	if (selection == 2)
+	if (selection == 1) 
+	{
+		easyMapCode();
+	}
+	else if (selection == 2)
 	{
 		MediumMapCode();
 	}
 
 		system("pause");
 		return 0;
+
+}
+
+
+
+
+void easyMapCode() {
+	// Code for Easy Level
+
+	clear();
+	cout << "=================================================================================================\n";
+	cout << "The Rules for the Easy Level are as follow:\n";
+	cout << "You cant move more than 1 space \n";
+	cout << "You are only allowed to move vertically or horizontally\n";
+	cout << "There are 8 Mines randomly located throughout the map\n";
+	cout << "You step on a mine you lose a life you only have 2 for this level\n";
+	cout << "You have __ many moves. Use to many you Loose 1 life\n";
+	cout << "If you make it to the end of the maze YOU WIN!!!\n";
+	cout << "Lastly have fun!\n";
+	cout << "=================================================================================================\n";
+
+	// Map Code
+
+	// TODO
+
+	// Registering Movement
+
+	cout << "Use WASD to move up, down, left, or right." << endl;
+	char move = 0;
+	do
+	{
+		move = _getch();
+
+		switch (move)
+		{
+		// Player moving upwards
+		case 'W':
+		case 'w':
+			cout << " ^ ";
+			break;
+		
+		// Player moving left
+		case 'A':
+		case 'a':
+			cout << " < ";
+			break;
+
+		// Player moving right
+		case 'D':
+		case 'd':
+			cout << " > ";
+			break;
+
+		// Player moving down
+		case 'S':
+		case 's':
+			cout << " V ";
+			break;
+
+		}
+	} while (true);
+
+
+
 
 }
 
@@ -175,4 +247,10 @@ void MedRight(int row, int col, string map[16][16])
 	string let = "x";
 	map[row][col + 1] = let;
 
+}
+
+
+// Notes: I made a clear() function that will clear the screen so we don't have to type out system("cls") everytime we want to clear the screen.
+void clear() {
+	system("cls");
 }
