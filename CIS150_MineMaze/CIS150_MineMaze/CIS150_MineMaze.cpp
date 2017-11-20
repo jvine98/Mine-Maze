@@ -206,25 +206,66 @@ void MediumMapCode()
 	// first move
 	cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 	cin >> select;
-	if (select == 'd')
+	for (int i = 0; i < 30; i++)
 	{
-		medmap[lastrow][lastcol] = " ";
-		system("cls");
-		MedDown(lastrow, lastcol, medmap);
-		lastrow = 2;
+		if (select == 'd')
+		{
+			medmap[lastrow][lastcol] = " ";
+			system("cls");
+			MedDown(lastrow, lastcol, medmap);
 
+			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
+			cin >> select;
+			lastrow++;
+		}
+		if (select == 'u')
+		{
+			medmap[lastrow][lastcol] = " ";
+			system("cls");
+			MedUp(lastrow, lastcol, medmap);
+			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
+			cin >> select;
+			lastrow--;
+		}
+		if (select == 'l')
+		{
+			medmap[lastrow][lastcol] = " ";
+			system("cls");
+			MedLeft(lastrow, lastcol, medmap);
+			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
+			cin >> select;
+			lastcol--;
+		}
+		if (select == 'r')
+		{
+			medmap[lastrow][lastcol] = " ";
+			system("cls");
+			MedRight(lastrow, lastcol, medmap);
+			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
+			cin >> select;
+			lastcol++;
+		}
 	}
 
 	
 }
 void MedUp(int row, int col, string map[16][16])
 {
+	system("cls");
 	string let = "x";
 	map[row - 1][col] = let;
+	for (int i = 0; i < 16; i++)
+	{
+		for (int a = 0; a < 16; a++)
+		{
+			cout << map[i][a] << " ";
+		}
+		cout << endl;
+	}
 }
 void MedDown(int row, int col, string map[16][16])
 {
-	
+	system("cls");
 	string let = "x";
 	map[row + 1][col] = let;
 	for (int i = 0; i < 16; i++)
@@ -238,14 +279,32 @@ void MedDown(int row, int col, string map[16][16])
 }
 void MedLeft(int row, int col, string map[16][16])
 {
+	system("cls");
 	string let = "x";
 	map[row][col - 1] = let;
+	for (int i = 0; i < 16; i++)
+	{
+		for (int a = 0; a < 16; a++)
+		{
+			cout << map[i][a] << " ";
+		}
+		cout << endl;
+	}
 
 }
 void MedRight(int row, int col, string map[16][16])
 {
+	system("cls");
 	string let = "x";
 	map[row][col + 1] = let;
+	for (int i = 0; i < 16; i++)
+	{
+		for (int a = 0; a < 16; a++)
+		{
+			cout << map[i][a] << " ";
+		}
+		cout << endl;
+	}
 
 }
 
