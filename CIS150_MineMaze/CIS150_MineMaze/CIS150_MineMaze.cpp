@@ -10,7 +10,9 @@
 #include <conio.h> // For player movement input
 #include <windows.h>
 using namespace std;
-
+// GLOBAL VARIABLE
+int MedLives = 2;
+int MedMoves = 30;
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -58,7 +60,6 @@ int main()
 	cout << "Select the Level you want to Play\n";
 	cout << "1. Easy\n";
 	cout << "2. Medium\n";
-	cout << "3. Hard\n";
 	cout << "==================================================================================================\n";
 	cout << "Enter your selection: ";
 	// CIN THE SELECTION
@@ -330,4 +331,103 @@ void MedRight(int row, int col, string map[16][16])
 // Notes: I made a clear() function that will clear the screen so we don't have to type out system("cls") everytime we want to clear the screen.
 void clear() {
 	system("cls");
+}
+
+
+int MedWallCheck(int row, int col)
+{
+	while (row < 16)
+	{
+		if (row == 0)
+		{
+			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 4 || col == 5 || col == 6 || col == 7 || col == 8 || col == 9 || col == 10 || col == 11 || col == 12 || col == 13 || col == 14 || col == 15)
+			{
+
+			}
+		}
+		if (row == 1)
+		{
+			if (col == 0 || col == 8)
+			{
+
+			}
+		}
+		if (row == 2)
+		{
+			if (col == 0 || col == 3 || col == 4 || col == 5 || col == 8 || col == 14)
+			{
+
+			}
+		}
+		if (row == 3)
+		{
+			if (col == 0 || col == 8 || col == 14)
+			{
+
+			}
+		}
+		if (row == 4)
+		{
+			if (col == 0 || col == 1 || col == 2 || col == 6 || col == 10 || col == 11 || col == 12 || col == 14)
+			{
+
+			}
+		}
+		if (row == 5)
+		{
+			if (col == 0 || col == 6 || col == 12)
+			{
+
+			}
+		}
+		if (row == 6)
+		{
+			if (col == 0 || col == 6 || col == 12)
+			{
+
+			}
+		}
+		if (row == 7)
+		{
+			if (col == 0 || col == 12)
+			{
+
+			}
+		}
+		if (row == 8)
+		{
+			if (col == 0 || col == 3 || col == 9)
+			{
+
+			}
+		}
+		if (row == 9)
+		{
+			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 5 || col == 6 || col == 7 || col == 9)
+			{
+
+			}
+		}
+		if (row == 10)
+		{
+			if (col == 0)
+			{
+
+			}
+		}
+		if (row == 11)
+		{
+			if (col == 0 || col == 11 || col == 12)
+			{
+
+			}
+		}
+		if (row == 12)
+		{
+			if (col == 0 || col = 5 || col == 6 || col == 7 || col == 8 || col == 13)
+			{
+
+			}
+		}
+	}
 }
