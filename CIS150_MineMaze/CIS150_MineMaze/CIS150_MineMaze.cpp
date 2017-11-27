@@ -99,28 +99,73 @@ void easyMapCode() {
 	cout << "Lastly have fun!\n";
 	cout << "=================================================================================================\n";
 
+
+
+
 	// Map Code
 
-	
 
-	const int row = 11, col = 11;
-	string easyMap[row][col] = {
-		{ " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" },
-		{ "1", "@", "@", "@", "@", "@", "@", "@", "@", "@", "@" },
-		{ "2", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "3", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "4", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "5", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "6", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "7", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "8", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "9", "@", " ", " ", " ", " ", " ", " ", " ", " ", "@" },
-		{ "10", "@", "@", "@", "@", "@", "@", "@", "@", "@", "@" },
+
+	const int easyRow = 11, easyCol = 12;
+	string easyMap[easyRow][easyCol] = {
+		{ " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
+		{ "1", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
+		{ "2", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "3", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "4", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "5", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "6", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "7", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "8", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "9", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "0", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
 	};
+
+	// Player Position
+	int pX = 2; // Column Position
+	int pY = 2; // Row Position
+	string playerPosition = easyMap[pX][pY];
+
+	// Display map
+	for (int row = 0; row < 11; row++)
+	{
+		for (int col = 0; col < 12; col++)
+		{
+			if (easyMap[row][col] == " ") {
+				// Do nothing
+			}
+			if (col == pX && row == pY) {
+				cout << "O";
+				cout << " ";
+			}
+
+			else {
+				cout << easyMap[row][col] << " ";
+			}
+
+
+			/*
+			if (col == 2 && row == 2)
+			{
+
+			cout << easyMap[row][col] << "O";
+			}
+			else
+			{
+			cout << easyMap[row][col] << " ";
+			} */
+
+		}
+		cout << endl;
+
+	}
+
 
 	// TODO
 
 	// Registering Movement
+	// Source: http://www.cplusplus.com/forum/general/55170/
+
 
 	cout << "Use WASD to move up, down, left, or right." << endl;
 	char move = 0;
@@ -130,28 +175,137 @@ void easyMapCode() {
 
 		switch (move)
 		{
-		// Player moving upwards
+			// Player moving upwards
 		case 'W':
 		case 'w':
 			cout << " ^ ";
+			if (easyMap[pX][pY - 1] == "X") {
+				// Do Nothing
+			}
+			else {
+				pY--;
+			}
+			system("cls");
+			for (int row = 0; row < 11; row++)
+			{
+				for (int col = 0; col < 12; col++)
+				{
+					if (easyMap[row][col] == " ") {
+						// Do nothing
+					}
+					if (col == pX && row == pY) {
+						cout << "O";
+						cout << " ";
+					}
+
+					else {
+						cout << easyMap[row][col] << " ";
+					}
+
+				}
+				cout << endl;
+
+			}
 			break;
-		
-		// Player moving left
+
+			// Player moving left
 		case 'A':
 		case 'a':
 			cout << " < ";
+			if (easyMap[pX - 1][pY] == "X") {
+				// Do Nothing
+			}
+			else {
+				pX--;
+			}
+			system("cls");
+			for (int row = 0; row < 11; row++)
+			{
+				for (int col = 0; col < 12; col++)
+				{
+					if (easyMap[row][col] == " ") {
+						// Do nothing
+					}
+					if (col == pX && row == pY) {
+						cout << "O";
+						cout << " ";
+					}
+
+					else {
+						cout << easyMap[row][col] << " ";
+					}
+
+				}
+				cout << endl;
+
+			}
 			break;
 
-		// Player moving right
+			// Player moving right
 		case 'D':
 		case 'd':
 			cout << " > ";
+			if (easyMap[pX + 1][pY] == "X") {
+				// Do Nothing
+			}
+			else {
+				pX++;
+			}
+
+			system("cls");
+			for (int row = 0; row < 11; row++)
+			{
+				for (int col = 0; col < 12; col++)
+				{
+					if (easyMap[row][col] == " ") {
+						// Do nothing
+					}
+					if (col == pX && row == pY) {
+						cout << "O";
+						cout << " ";
+					}
+
+					else {
+						cout << easyMap[row][col] << " ";
+					}
+
+				}
+				cout << endl;
+
+			}
 			break;
 
-		// Player moving down
+			// Player moving down
 		case 'S':
 		case 's':
 			cout << " V ";
+			if (easyMap[pX][pY + 1] == "X") {
+				// Do Nothing
+			}
+			else {
+				pY++;
+			}
+			system("cls");
+			for (int row = 0; row < 11; row++)
+			{
+				for (int col = 0; col < 12; col++)
+				{
+					if (easyMap[row][col] == " ") {
+						// Do nothing
+					}
+					if (col == pX && row == pY) {
+						cout << "O";
+						cout << " ";
+					}
+
+					else {
+						cout << easyMap[row][col] << " ";
+					}
+
+				}
+				cout << endl;
+
+			}
 			break;
 
 		}
