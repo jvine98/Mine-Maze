@@ -31,6 +31,8 @@ void MedUp(int, int, string map[16][16]);
 void MedDown(int, int, string map [16][16]);
 void MedLeft(int, int, string map[16][16]);
 void MedRight(int ,int, string map[16][16]);
+int MedWallCheck(int, int);
+
 
 void clear();
 
@@ -230,9 +232,7 @@ void MediumMapCode()
 		if (select == 'd')
 		{
 			medmap[lastrow][lastcol] = " ";
-			system("cls");
 			MedDown(lastrow, lastcol, medmap);
-
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
 			lastrow++;
@@ -240,7 +240,6 @@ void MediumMapCode()
 		if (select == 'u')
 		{
 			medmap[lastrow][lastcol] = " ";
-			system("cls");
 			MedUp(lastrow, lastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
@@ -249,7 +248,6 @@ void MediumMapCode()
 		if (select == 'l')
 		{
 			medmap[lastrow][lastcol] = " ";
-			system("cls");
 			MedLeft(lastrow, lastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
@@ -258,7 +256,6 @@ void MediumMapCode()
 		if (select == 'r')
 		{
 			medmap[lastrow][lastcol] = " ";
-			system("cls");
 			MedRight(lastrow, lastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
@@ -336,98 +333,122 @@ void clear() {
 
 int MedWallCheck(int row, int col)
 {
-	while (row < 16)
+	int i = 1;
+	if (row < 16)
 	{
 		if (row == 0)
 		{
 			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 4 || col == 5 || col == 6 || col == 7 || col == 8 || col == 9 || col == 10 || col == 11 || col == 12 || col == 13 || col == 14 || col == 15)
 			{
-
+				i--;
 			}
 		}
-		if (row == 1)
+		else if (row == 1)
 		{
 			if (col == 0 || col == 8)
 			{
-
+				i--;
 			}
+
 		}
-		if (row == 2)
+		else if (row == 2)
 		{
 			if (col == 0 || col == 3 || col == 4 || col == 5 || col == 8 || col == 14)
 			{
-
+				i--;
 			}
 		}
-		if (row == 3)
+		else if (row == 3)
 		{
 			if (col == 0 || col == 8 || col == 14)
 			{
-
+				i--;
 			}
 		}
-		if (row == 4)
+		else if (row == 4)
 		{
 			if (col == 0 || col == 1 || col == 2 || col == 6 || col == 10 || col == 11 || col == 12 || col == 14)
 			{
-
+				i--;
 			}
 		}
-		if (row == 5)
+		else if (row == 5)
 		{
 			if (col == 0 || col == 6 || col == 12)
 			{
-
+				i--;
 			}
 		}
-		if (row == 6)
+		else if (row == 6)
 		{
 			if (col == 0 || col == 6 || col == 12)
 			{
-
+				i--;
 			}
 		}
-		if (row == 7)
+		else if (row == 7)
 		{
 			if (col == 0 || col == 12)
 			{
-
+				i--;
 			}
 		}
-		if (row == 8)
+		else if (row == 8)
 		{
 			if (col == 0 || col == 3 || col == 9)
 			{
-
+				i--;
 			}
 		}
-		if (row == 9)
+		else if (row == 9)
 		{
 			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 5 || col == 6 || col == 7 || col == 9)
 			{
-
+				i--;
 			}
 		}
-		if (row == 10)
+		else if (row == 10)
 		{
 			if (col == 0)
 			{
-
+				i--;
 			}
 		}
-		if (row == 11)
+		else if (row == 11)
 		{
 			if (col == 0 || col == 11 || col == 12)
 			{
-
+				i--;
 			}
 		}
-		if (row == 12)
+		else if (row == 12)
 		{
-			if (col == 0 || col = 5 || col == 6 || col == 7 || col == 8 || col == 13)
+			if (col == 0|| col == 5 || col == 6 || col == 7 || col == 8 || col == 13)
 			{
-
+				i--;
+			}
+		}
+		else if (row == 13)
+		{
+			if (col == 0 || col == 1 || col == 2 || col == 5)
+			{
+				i--;
+			}
+		}
+		else if (row == 14)
+		{
+			if (col == 0 || col == 11 || col == 12 || col == 13)
+			{
+				i--;
+			}
+		}
+		else if (row == 15)
+		{
+			if (col == 0 || col == 13)
+			{
+				i--;
 			}
 		}
 	}
+	return i;
 }
