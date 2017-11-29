@@ -109,12 +109,6 @@ void easyMapCode() {
 	cout << "=================================================================================================\n";
 
 
-
-
-	// Map Code
-
-
-
 	const int easyRow = 11, easyCol = 12;
 	string easyMap[easyRow][easyCol] = {
 		{ " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
@@ -129,57 +123,10 @@ void easyMapCode() {
 		{ "9", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "0", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
 	};
-
-	// Player Position
-
-	string playerPosition = easyMap[pX][pY];
-
-	// Display map
-	for (int row = 0; row < 11; row++)
-	{
-		for (int col = 0; col < 12; col++)
-		{
-			if (easyMap[row][col] == " ") {
-				// Do nothing
-			}
-			if (col == pX && row == pY) {
-				cout << "O";
-				cout << " ";
-			}
-
-			else {
-				cout << easyMap[row][col] << " ";
-			}
-
-
-			/*
-			if (col == 2 && row == 2)
-			{
-
-			cout << easyMap[row][col] << "O";
-			}
-			else
-			{
-			cout << easyMap[row][col] << " ";
-			} */
-
-		}
-		cout << endl;
-
-	}
-
-
-	// TODO
-
 	// Registering Movement
 	// Source: http://www.cplusplus.com/forum/general/55170/
 	string medMap[16][16];
 	playerMovement(1, easyMap, medMap, 2, 2);
-
-
-
-
-
 }
 
 void MediumMapCode()
@@ -188,23 +135,23 @@ void MediumMapCode()
 	// Map for the medium level
 	char select;
 	const int medrow = 16, medcolm = 16;
-	string medmap[medrow][medcolm] = {
-		{ " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" ,"n", "o" },
-		{ "a", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
-		{ "b", " ", " ", "-", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", "|", " " },
-		{ "c", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " " },
-		{ "d", "-", "-", " ", " ", " ", "|", " ", " ", " ", "-", "-", "-", " ", "|", " " },
-		{ "e", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " " },
-		{ "f", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " " },
-		{ "g", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " " },
-		{ "h", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", " " },
-		{ "i", "-", "-", "|", " ", "-", "-", "-", " ", "|", " ", " ", " ", " ", " ", " " },
-		{ "j", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
-		{ "k", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", " ", " ", " " },
-		{ "l", " ", " ", " ", " ", "-", "-", "-", "-", " ", " ", " ", " ", "|", " ", " " },
-		{ "m", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
-		{ "n", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", "-", " ", " " },
-		{ "o", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " " },
+	string medMap[medrow][medcolm] = {
+		{ " ", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" ,"X", " " },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", "-", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", "|", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", "X" },
+		{ "X", "-", "-", " ", " ", " ", "|", " ", " ", " ", "-", "-", "-", " ", "|", "X" },
+		{ "X", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
+		{ "X", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "X" },
+		{ "X", "-", "-", "|", " ", "-", "-", "-", " ", "|", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", "-", "-", "-", "-", " ", " ", " ", " ", "|", " ", "X" },
+		{ "X", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", "-", " ", "X" },
+		{ " ", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", " " },
 
 	};
 
@@ -221,256 +168,17 @@ void MediumMapCode()
 	cout << "=================================================================================================\n";
 	cout << endl;
 	//The Medium Maze
+	string easyMap[11][12];
+	playerMovement(1, easyMap, medMap, 1, 1);
 
-	for (int row = 0; row < 16; row++)
-	{
-		for (int col = 0; col < 16; col++)
-		{
-			if (col == 1 && row == 1)
-			{
-				medmap[1][1] = "x";
-				cout << medmap[1][1];
-			}
-			else
-			{
-				cout << medmap[row][col] << " ";
-			}
-
-		}
-		cout << endl;
-
-	}
-	
-
-	//MOVEMENT
-	cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
-	cin >> select;
-
-	for (int i = 0; i < 30; i++)
-	{
-		if (select == 'd')
-		{
-			medmap[medlastrow][medlastcol] = " ";
-			MedDown(medlastrow, medlastcol, medmap);
-			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
-			cin >> select;
-			medlastrow++;
-		}
-		if (select == 'u')
-		{
-			medmap[medlastrow][medlastcol] = " ";
-			MedUp(medlastrow, medlastcol, medmap);
-			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
-			cin >> select;
-			medlastrow--;
-		}
-		if (select == 'l')
-		{
-			medmap[medlastrow][medlastcol] = " ";
-			MedLeft(medlastrow, medlastcol, medmap);
-			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
-			cin >> select;
-			medlastcol--;
-		}
-		if (select == 'r')
-		{
-			medmap[medlastrow][medlastcol] = " ";
-			MedRight(medlastrow, medlastcol, medmap);
-			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
-			cin >> select;
-			medlastcol++;
-		}
-	}
 
 	
 }
-void MedUp(int row, int col, string map[16][16])
-{
-	system("cls");
-	string let = "x";
-	map[row - 1][col] = let;
-	for (int i = 0; i < 16; i++)
-	{
-		for (int a = 0; a < 16; a++)
-		{
-			cout << map[i][a] << " ";
-		}
-		cout << endl;
-	}
-}
-void MedDown(int row, int col, string map[16][16])
-{
-	system("cls");
-	string let = "x";
-	map[row + 1][col] = let;
-	for (int i = 0; i < 16; i++)
-	{
-		for (int a = 0; a < 16; a++)
-		{
-			cout << map[i][a] << " ";
-		}
-		cout << endl;
-	}
-}
-void MedLeft(int row, int col, string map[16][16])
-{
-	system("cls");
-	string let = "x";
-	map[row][col - 1] = let;
-	for (int i = 0; i < 16; i++)
-	{
-		for (int a = 0; a < 16; a++)
-		{
-			cout << map[i][a] << " ";
-		}
-		cout << endl;
-	}
-
-}
-void MedRight(int row, int col, string map[16][16])
-{
-	system("cls");
-	string let = "x";
-	map[row][col + 1] = let;
-	for (int i = 0; i < 16; i++)
-	{
-		for (int a = 0; a < 16; a++)
-		{
-			cout << map[i][a] << " ";
-		}
-		cout << endl;
-	}
-
-}
-
-
 // Notes: I made a clear() function that will clear the screen so we don't have to type out system("cls") everytime we want to clear the screen.
 void clear() {
 	system("cls");
 }
 
-
-int MedWallCheck(int row, int col)
-{
-	int i = 1;
-	if (row < 16)
-	{
-		if (row == 0)
-		{
-			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 4 || col == 5 || col == 6 || col == 7 || col == 8 || col == 9 || col == 10 || col == 11 || col == 12 || col == 13 || col == 14 || col == 15)
-			{
-				i--;
-			}
-		}
-		else if (row == 1)
-		{
-			if (col == 0)
-			{
-				i--;
-			}
-
-		}
-		else if (row == 2)
-		{
-			if (col == 0 || col == 3 || col == 4 || col == 5 || col == 8 || col == 14)
-			{
-				i--;
-			}
-		}
-		else if (row == 3)
-		{
-			if (col == 0 || col == 8 || col == 14)
-			{
-				i--;
-			}
-		}
-		else if (row == 4)
-		{
-			if (col == 0 || col == 1 || col == 2 || col == 6 || col == 10 || col == 11 || col == 12 || col == 14)
-			{
-				i--;
-			}
-		}
-		else if (row == 5)
-		{
-			if (col == 0 || col == 6 || col == 12)
-			{
-				i--;
-			}
-		}
-		else if (row == 6)
-		{
-			if (col == 0 || col == 6 || col == 12)
-			{
-				i--;
-			}
-		}
-		else if (row == 7)
-		{
-			if (col == 0 || col == 12)
-			{
-				i--;
-			}
-		}
-		else if (row == 8)
-		{
-			if (col == 0 || col == 3 || col == 9)
-			{
-				i--;
-			}
-		}
-		else if (row == 9)
-		{
-			if (col == 0 || col == 1 || col == 2 || col == 3 || col == 5 || col == 6 || col == 7 || col == 9)
-			{
-				i--;
-			}
-		}
-		else if (row == 10)
-		{
-			if (col == 0)
-			{
-				i--;
-			}
-		}
-		else if (row == 11)
-		{
-			if (col == 0 || col == 11 || col == 12)
-			{
-				i--;
-			}
-		}
-		else if (row == 12)
-		{
-			if (col == 0|| col == 5 || col == 6 || col == 7 || col == 8 || col == 13)
-			{
-				i--;
-			}
-		}
-		else if (row == 13)
-		{
-			if (col == 0 || col == 1 || col == 2 || col == 5)
-			{
-				i--;
-			}
-		}
-		else if (row == 14)
-		{
-			if (col == 0 || col == 11 || col == 12 || col == 13)
-			{
-				i--;
-			}
-		}
-		else if (row == 15)
-		{
-			if (col == 0 || col == 13)
-			{
-				i--;
-			}
-		}
-	}
-	return i;
-}
 
 int MedMinePlacement(int row, int col)
 {
@@ -635,17 +343,17 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'W':
 			case 'w':
 				cout << " ^ ";
-				if (easyMap[pX][pY - 1] == "X") {
+				if (medMap[pX][pY - 1] == "X") {
 				}
 				else {
 					pY--;
 				}
 				system("cls");
-				for (int row = 0; row < 11; row++)
+				for (int row = 0; row < 16; row++)
 				{
-					for (int col = 0; col < 12; col++)
+					for (int col = 0; col < 16; col++)
 					{
-						if (easyMap[row][col] == " ") {
+						if (medMap[row][col] == " ") {
 						}
 						if (col == pX && row == pY) {
 							cout << "O";
@@ -653,7 +361,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 						}
 
 						else {
-							cout << easyMap[row][col] << " ";
+							cout << medMap[row][col] << " ";
 						}
 
 					}
@@ -666,17 +374,17 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'A':
 			case 'a':
 				cout << " < ";
-				if (easyMap[pX - 1][pY] == "X") {
+				if (medMap[pX - 1][pY] == "X") {
 				}
 				else {
 					pX--;
 				}
 				system("cls");
-				for (int row = 0; row < 11; row++)
+				for (int row = 0; row < 16; row++)
 				{
-					for (int col = 0; col < 12; col++)
+					for (int col = 0; col < 16; col++)
 					{
-						if (easyMap[row][col] == " ") {
+						if (medMap[row][col] == " ") {
 						}
 						if (col == pX && row == pY) {
 							cout << "O";
@@ -684,7 +392,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 						}
 
 						else {
-							cout << easyMap[row][col] << " ";
+							cout << medMap[row][col] << " ";
 						}
 
 					}
@@ -697,18 +405,18 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'D':
 			case 'd':
 				cout << " > ";
-				if (easyMap[pX + 1][pY] == "X") {
+				if (medMap[pX + 1][pY] == "X") {
 				}
 				else {
 					pX++;
 				}
 
 				system("cls");
-				for (int row = 0; row < 11; row++)
+				for (int row = 0; row < 16; row++)
 				{
-					for (int col = 0; col < 12; col++)
+					for (int col = 0; col < 16; col++)
 					{
-						if (easyMap[row][col] == " ") {
+						if (medMap[row][col] == " ") {
 						}
 						if (col == pX && row == pY) {
 							cout << "O";
@@ -716,7 +424,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 						}
 
 						else {
-							cout << easyMap[row][col] << " ";
+							cout << medMap[row][col] << " ";
 						}
 
 					}
@@ -729,17 +437,17 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'S':
 			case 's':
 				cout << " V ";
-				if (easyMap[pX][pY + 1] == "X") {
+				if (medMap[pX][pY + 1] == "X") {
 				}
 				else {
 					pY++;
 				}
 				system("cls");
-				for (int row = 0; row < 11; row++)
+				for (int row = 0; row < 16; row++)
 				{
-					for (int col = 0; col < 12; col++)
+					for (int col = 0; col < 16; col++)
 					{
-						if (easyMap[row][col] == " ") {
+						if (medMap[row][col] == " ") {
 						}
 						if (col == pX && row == pY) {
 							cout << "O";
@@ -747,7 +455,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 						}
 
 						else {
-							cout << easyMap[row][col] << " ";
+							cout << medMap[row][col] << " ";
 						}
 
 					}
