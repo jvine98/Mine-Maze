@@ -13,6 +13,8 @@ using namespace std;
 // GLOBAL VARIABLE
 int MedLives = 2;
 int MedMoves = 30;
+int medlastrow = 1;
+int medlastcol = 1;
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -32,6 +34,8 @@ void MedDown(int, int, string map [16][16]);
 void MedLeft(int, int, string map[16][16]);
 void MedRight(int ,int, string map[16][16]);
 int MedWallCheck(int, int);
+int MedOutOfBounds(int, int);
+int MedMinePlacement(int, int);
 
 
 void clear();
@@ -321,8 +325,6 @@ void MediumMapCode()
 
 	// Map for the medium level
 	char select;
-	int lastrow = 1;
-	int lastcol = 1;
 	const int medrow = 16, medcolm = 16;
 	string medmap[medrow][medcolm] = {
 		{ " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" ,"n", "o" },
@@ -378,42 +380,43 @@ void MediumMapCode()
 	}
 	
 
-	// first move
+	//MOVEMENT
 	cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 	cin >> select;
+
 	for (int i = 0; i < 30; i++)
 	{
 		if (select == 'd')
 		{
-			medmap[lastrow][lastcol] = " ";
-			MedDown(lastrow, lastcol, medmap);
+			medmap[medlastrow][medlastcol] = " ";
+			MedDown(medlastrow, medlastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
-			lastrow++;
+			medlastrow++;
 		}
 		if (select == 'u')
 		{
-			medmap[lastrow][lastcol] = " ";
-			MedUp(lastrow, lastcol, medmap);
+			medmap[medlastrow][medlastcol] = " ";
+			MedUp(medlastrow, medlastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
-			lastrow--;
+			medlastrow--;
 		}
 		if (select == 'l')
 		{
-			medmap[lastrow][lastcol] = " ";
-			MedLeft(lastrow, lastcol, medmap);
+			medmap[medlastrow][medlastcol] = " ";
+			MedLeft(medlastrow, medlastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
-			lastcol--;
+			medlastcol--;
 		}
 		if (select == 'r')
 		{
-			medmap[lastrow][lastcol] = " ";
-			MedRight(lastrow, lastcol, medmap);
+			medmap[medlastrow][medlastcol] = " ";
+			MedRight(medlastrow, medlastcol, medmap);
 			cout << "Enter 'u' to move up 'd' to move down 'l' to move left or 'r' to move right: ";
 			cin >> select;
-			lastcol++;
+			medlastcol++;
 		}
 	}
 
@@ -603,6 +606,30 @@ int MedWallCheck(int row, int col)
 				i--;
 			}
 		}
+	}
+	return i;
+}
+
+int MedMinePlacement(int row, int col)
+{
+	int i = 0;
+	if (row < 16)
+	{
+		// i need a randomize number function
+	}
+	return i;
+}
+
+int MedOutOfBounds(int row, int col)
+{
+	int i = 0;
+	if (row >= 16)
+	{
+		i = 1;
+	}
+	if (col >= 16)
+	{
+		i = 1;
 	}
 	return i;
 }
