@@ -1,5 +1,5 @@
 ﻿  CIS150_MineMaze.cpp
-c:\users\jvine\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(58): warning C4101: 'moves': unreferenced local variable
-c:\users\jvine\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(57): warning C4101: 'lives': unreferenced local variable
-  CIS150_MineMaze.vcxproj -> C:\Users\jvine\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.exe
-  CIS150_MineMaze.vcxproj -> C:\Users\jvine\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.pdb (Full PDB)
+c:\users\emanzagol\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(63): warning C4101: 'moves': unreferenced local variable
+c:\users\emanzagol\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(62): warning C4101: 'lives': unreferenced local variable
+  CIS150_MineMaze.vcxproj -> C:\Users\emanzagol\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.exe
+  CIS150_MineMaze.vcxproj -> C:\Users\emanzagol\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.pdb (Full PDB)

@@ -15,6 +15,9 @@ int MedLives = 2;
 int MedMoves = 30;
 int medlastrow = 1;
 int medlastcol = 1;
+int pX = 2; // Column Position
+int pY = 2; // Row Position
+string easyMap;
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -36,6 +39,8 @@ void MedRight(int ,int, string map[16][16]);
 int MedWallCheck(int, int);
 int MedOutOfBounds(int, int);
 int MedMinePlacement(int, int);
+void playerMovement(int selection, string easyMap[11][12], string medMap[16][16], int xAxis, int yAxis);
+
 
 
 void clear();
@@ -126,8 +131,7 @@ void easyMapCode() {
 	};
 
 	// Player Position
-	int pX = 2; // Column Position
-	int pY = 2; // Row Position
+
 	string playerPosition = easyMap[pX][pY];
 
 	// Display map
@@ -169,151 +173,9 @@ void easyMapCode() {
 
 	// Registering Movement
 	// Source: http://www.cplusplus.com/forum/general/55170/
+	string medMap[16][16];
+	playerMovement(1, easyMap, medMap, 2, 2);
 
-
-	cout << "Use WASD to move up, down, left, or right." << endl;
-	char move = 0;
-	do
-	{
-		move = _getch();
-
-		switch (move)
-		{
-			// Player moving upwards
-		case 'W':
-		case 'w':
-			cout << " ^ ";
-			if (easyMap[pX][pY - 1] == "X") {
-				// Do Nothing
-			}
-			else {
-				pY--;
-			}
-			system("cls");
-			for (int row = 0; row < 11; row++)
-			{
-				for (int col = 0; col < 12; col++)
-				{
-					if (easyMap[row][col] == " ") {
-						// Do nothing
-					}
-					if (col == pX && row == pY) {
-						cout << "O";
-						cout << " ";
-					}
-
-					else {
-						cout << easyMap[row][col] << " ";
-					}
-
-				}
-				cout << endl;
-
-			}
-			break;
-
-			// Player moving left
-		case 'A':
-		case 'a':
-			cout << " < ";
-			if (easyMap[pX - 1][pY] == "X") {
-				// Do Nothing
-			}
-			else {
-				pX--;
-			}
-			system("cls");
-			for (int row = 0; row < 11; row++)
-			{
-				for (int col = 0; col < 12; col++)
-				{
-					if (easyMap[row][col] == " ") {
-						// Do nothing
-					}
-					if (col == pX && row == pY) {
-						cout << "O";
-						cout << " ";
-					}
-
-					else {
-						cout << easyMap[row][col] << " ";
-					}
-
-				}
-				cout << endl;
-
-			}
-			break;
-
-			// Player moving right
-		case 'D':
-		case 'd':
-			cout << " > ";
-			if (easyMap[pX + 1][pY] == "X") {
-				// Do Nothing
-			}
-			else {
-				pX++;
-			}
-
-			system("cls");
-			for (int row = 0; row < 11; row++)
-			{
-				for (int col = 0; col < 12; col++)
-				{
-					if (easyMap[row][col] == " ") {
-						// Do nothing
-					}
-					if (col == pX && row == pY) {
-						cout << "O";
-						cout << " ";
-					}
-
-					else {
-						cout << easyMap[row][col] << " ";
-					}
-
-				}
-				cout << endl;
-
-			}
-			break;
-
-			// Player moving down
-		case 'S':
-		case 's':
-			cout << " V ";
-			if (easyMap[pX][pY + 1] == "X") {
-				// Do Nothing
-			}
-			else {
-				pY++;
-			}
-			system("cls");
-			for (int row = 0; row < 11; row++)
-			{
-				for (int col = 0; col < 12; col++)
-				{
-					if (easyMap[row][col] == " ") {
-						// Do nothing
-					}
-					if (col == pX && row == pY) {
-						cout << "O";
-						cout << " ";
-					}
-
-					else {
-						cout << easyMap[row][col] << " ";
-					}
-
-				}
-				cout << endl;
-
-			}
-			break;
-
-		}
-	} while (true);
 
 
 
@@ -620,16 +482,285 @@ int MedMinePlacement(int row, int col)
 	return i;
 }
 
-int MedOutOfBounds(int row, int col)
+void playerMovement(int selection, string easyMap[11][12], string medMap[16][16], int pX, int pY)
 {
-	int i = 0;
-	if (row >= 16)
-	{
-		i = 1;
+
+	if (selection == 1) {
+		cout << "Use WASD to move up, down, left, or right." << endl;
+		char move = 0;
+		do
+		{
+			move = _getch();
+
+			switch (move)
+			{
+				// Player moving upwards
+			case 'W':
+			case 'w':
+				cout << " ^ ";
+				if (easyMap[pX][pY - 1] == "X") {
+				}
+				else {
+					pY--;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving left
+			case 'A':
+			case 'a':
+				cout << " < ";
+				if (easyMap[pX - 1][pY] == "X") {
+				}
+				else {
+					pX--;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving right
+			case 'D':
+			case 'd':
+				cout << " > ";
+				if (easyMap[pX + 1][pY] == "X") {
+				}
+				else {
+					pX++;
+				}
+
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving down
+			case 'S':
+			case 's':
+				cout << " V ";
+				if (easyMap[pX][pY + 1] == "X") {
+				}
+				else {
+					pY++;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+			}
+		} while (true);
 	}
-	if (col >= 16)
-	{
-		i = 1;
+	if (selection == 2) {
+		cout << "Use WASD to move up, down, left, or right." << endl;
+		char move = 0;
+		do
+		{
+			move = _getch();
+
+			switch (move)
+			{
+				// Player moving upwards
+			case 'W':
+			case 'w':
+				cout << " ^ ";
+				if (easyMap[pX][pY - 1] == "X") {
+				}
+				else {
+					pY--;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving left
+			case 'A':
+			case 'a':
+				cout << " < ";
+				if (easyMap[pX - 1][pY] == "X") {
+				}
+				else {
+					pX--;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving right
+			case 'D':
+			case 'd':
+				cout << " > ";
+				if (easyMap[pX + 1][pY] == "X") {
+				}
+				else {
+					pX++;
+				}
+
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+				// Player moving down
+			case 'S':
+			case 's':
+				cout << " V ";
+				if (easyMap[pX][pY + 1] == "X") {
+				}
+				else {
+					pY++;
+				}
+				system("cls");
+				for (int row = 0; row < 11; row++)
+				{
+					for (int col = 0; col < 12; col++)
+					{
+						if (easyMap[row][col] == " ") {
+						}
+						if (col == pX && row == pY) {
+							cout << "O";
+							cout << " ";
+						}
+
+						else {
+							cout << easyMap[row][col] << " ";
+						}
+
+					}
+					cout << endl;
+
+				}
+				break;
+
+			}
+		} while (true);
 	}
-	return i;
+
+
 }
+
+
