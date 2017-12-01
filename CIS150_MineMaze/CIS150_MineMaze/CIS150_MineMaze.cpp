@@ -18,6 +18,7 @@ int medlastcol = 1;
 int pX = 2; // Column Position
 int pY = 2; // Row Position
 string easyMap;
+string medMap;
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -113,11 +114,11 @@ void easyMapCode() {
 	string easyMap[easyRow][easyCol] = {
 		{ " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
 		{ "1", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-		{ "2", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "3", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "4", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "2", "X", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
+		{ "3", "X", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
+		{ "4", "X", " ", " ", "X", "X", " ", " ", " ", "X", "X" },
 		{ "5", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "6", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "6", "X", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
 		{ "7", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "8", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "9", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
@@ -133,26 +134,24 @@ void MediumMapCode()
 {
 
 	// Map for the medium level
-	char select;
-	const int medrow = 16, medcolm = 16;
-	string medMap[medrow][medcolm] = {
-		{ " ", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" ,"X", " " },
+	const int medRow = 16, medCol = 16;
+	string medMap[medRow][medCol] = {
+		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", "-", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", "|", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", "X" },
-		{ "X", "-", "-", " ", " ", " ", "|", " ", " ", " ", "-", "-", "-", " ", "|", "X" },
-		{ "X", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|", " ", " ", "X" },
-		{ "X", " ", " ", "|", " ", " ", " ", " ", " ", "|", " ", " ", " ", " ", " ", "X" },
-		{ "X", "-", "-", "|", " ", "-", "-", "-", " ", "|", " ", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", "-", "-", "-", "-", " ", " ", " ", " ", "|", " ", "X" },
-		{ "X", "-", "-", " ", " ", "|", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-", "-", "-", " ", "X" },
-		{ " ", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", " " },
-
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 	};
 
 	// Rules for the medium level
@@ -169,7 +168,7 @@ void MediumMapCode()
 	cout << endl;
 	//The Medium Maze
 	string easyMap[11][12];
-	playerMovement(1, easyMap, medMap, 1, 1);
+	playerMovement(2, easyMap, medMap, 1, 1);
 
 
 	
@@ -206,7 +205,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'W':
 			case 'w':
 				cout << " ^ ";
-				if (easyMap[pX][pY - 1] == "X") {
+				if (easyMap[pY - 1][pX] == "X") {
 				}
 				else {
 					pY--;
@@ -214,6 +213,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 				system("cls");
 				for (int row = 0; row < 11; row++)
 				{
+					int xX = 0, xY = 0;
 					for (int col = 0; col < 12; col++)
 					{
 						if (easyMap[row][col] == " ") {
@@ -225,11 +225,14 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 
 						else {
 							cout << easyMap[row][col] << " ";
+							if (col > 1 && row > 1 && col < 10 && row < 10) {
+								xX = row;
+								xY = col;
+							}
 						}
 
 					}
 					cout << endl;
-
 				}
 				break;
 
@@ -237,7 +240,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'A':
 			case 'a':
 				cout << " < ";
-				if (easyMap[pX - 1][pY] == "X") {
+				if (easyMap[pY][pX - 1] == "X") {
 				}
 				else {
 					pX--;
@@ -268,7 +271,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'D':
 			case 'd':
 				cout << " > ";
-				if (easyMap[pX + 1][pY] == "X") {
+				if (easyMap[pY][pX + 1] == "X") {
 				}
 				else {
 					pX++;
@@ -300,7 +303,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'S':
 			case 's':
 				cout << " V ";
-				if (easyMap[pX][pY + 1] == "X") {
+				if (easyMap[pY + 1][pX] == "X") {
 				}
 				else {
 					pY++;
@@ -339,11 +342,12 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 
 			switch (move)
 			{
-				// Player moving upwards
+				// Player moving upwards			switch (move)
+					// Player moving upwards
 			case 'W':
 			case 'w':
 				cout << " ^ ";
-				if (medMap[pX][pY - 1] == "X") {
+				if (medMap[pY - 1][pX] == "X") {
 				}
 				else {
 					pY--;
@@ -351,6 +355,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 				system("cls");
 				for (int row = 0; row < 16; row++)
 				{
+					int xX = 0, xY = 0;
 					for (int col = 0; col < 16; col++)
 					{
 						if (medMap[row][col] == " ") {
@@ -362,6 +367,10 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 
 						else {
 							cout << medMap[row][col] << " ";
+							if (col > 1 && row > 1 && col < 10 && row < 10) {
+								xX = row;
+								xY = col;
+							}
 						}
 
 					}
@@ -374,7 +383,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'A':
 			case 'a':
 				cout << " < ";
-				if (medMap[pX - 1][pY] == "X") {
+				if (medMap[pY][pX - 1] == "X") {
 				}
 				else {
 					pX--;
@@ -405,7 +414,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'D':
 			case 'd':
 				cout << " > ";
-				if (medMap[pX + 1][pY] == "X") {
+				if (medMap[pY][pX + 1] == "X") {
 				}
 				else {
 					pX++;
@@ -437,7 +446,7 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'S':
 			case 's':
 				cout << " V ";
-				if (medMap[pX][pY + 1] == "X") {
+				if (medMap[pY + 1][pX] == "X") {
 				}
 				else {
 					pY++;
@@ -464,10 +473,16 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 				}
 				break;
 
+				
 			}
-		} while (true);
-	}
 
+			// Player moving down
+
+		} while (true);
+
+
+
+	}
 
 }
 
