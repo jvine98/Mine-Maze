@@ -9,12 +9,14 @@
 #include <string>
 #include <conio.h> // For player movement input
 #include <windows.h>
+#include <stdlib.h> // www.cplusplus.com/reference/cstdlib/rand/
+#include <time.h> // www.cplusplus.com/reference/cstdlib/rand/
+
+
+
 using namespace std;
 // GLOBAL VARIABLE
-int MedLives = 2;
-int MedMoves = 30;
-int medlastrow = 1;
-int medlastcol = 1;
+
 int pX = 2; // Column Position
 int pY = 2; // Row Position
 string easyMap;
@@ -33,14 +35,13 @@ void displayStartup() {
 }
 void easyMapCode();
 void MediumMapCode();
-void MedUp(int, int, string map[16][16]);
-void MedDown(int, int, string map [16][16]);
-void MedLeft(int, int, string map[16][16]);
-void MedRight(int ,int, string map[16][16]);
-int MedWallCheck(int, int);
-int MedOutOfBounds(int, int);
+
+
+
+
+
 int MedMinePlacement(int, int);
-void playerMovement(int selection, string easyMap[11][12], string medMap[16][16], int xAxis, int yAxis);
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int xAxis, int yAxis, int pLives);
 
 
 
@@ -48,6 +49,13 @@ void clear();
 
 int main()
 {
+
+
+	// Mine placer
+
+
+
+	
 
 	// ======================================
 	// Map variables
@@ -94,6 +102,7 @@ int main()
 
 
 
+
 void easyMapCode() {
 	// Code for Easy Level
 
@@ -124,10 +133,48 @@ void easyMapCode() {
 		{ "9", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "0", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
 	};
+
+	string easyBTS[easyRow][easyCol];
+
+	int placeMine;
+	int mineCount = 0;
+	srand(time(NULL));
+
+	for (int i = 0; i < 11; i++) {
+
+		for (int j = 0; j < 12; j++) {
+
+			
+
+			placeMine = rand() % 8;
+
+			if (placeMine == 0) {
+				easyBTS[i][j] = "&";
+				mineCount++;
+			}
+			else {
+				easyBTS[i][j] = ".";
+			}
+
+		}
+
+	}
+
+	for (int i = 0; i < 11; i++) {
+
+		for (int j = 0; j < 12; j++) {
+			cout << easyBTS[i][j] << " ";
+
+		}
+		cout << endl;
+
+	}
+
+
 	// Registering Movement
 	// Source: http://www.cplusplus.com/forum/general/55170/
 	string medMap[16][16];
-	playerMovement(1, easyMap, medMap, 2, 2);
+	playerMovement(1, easyMap, easyBTS, medMap, 2, 2, 10);
 }
 
 void MediumMapCode()
@@ -168,10 +215,11 @@ void MediumMapCode()
 	cout << endl;
 	//The Medium Maze
 	string easyMap[11][12];
-	playerMovement(2, easyMap, medMap, 1, 1);
+	string easyBTS[11][12];
+	playerMovement(2, easyMap, easyBTS, medMap, 1, 1, 5);
 
 
-	
+
 }
 // Notes: I made a clear() function that will clear the screen so we don't have to type out system("cls") everytime we want to clear the screen.
 void clear() {
@@ -189,7 +237,7 @@ int MedMinePlacement(int row, int col)
 	return i;
 }
 
-void playerMovement(int selection, string easyMap[11][12], string medMap[16][16], int pX, int pY)
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int pX, int pY, int pLives)
 {
 
 	if (selection == 1) {
@@ -205,11 +253,19 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 			case 'W':
 			case 'w':
 				cout << " ^ ";
+				if (easyBTS[pY - 1][pX] == "&") {
+					pLives--;
+					pX = 2;
+					pY = 2;
+				}
 				if (easyMap[pY - 1][pX] == "X") {
 				}
 				else {
 					pY--;
 				}
+				// Mine grid
+
+ 
 				system("cls");
 				for (int row = 0; row < 11; row++)
 				{
@@ -234,12 +290,19 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 					}
 					cout << endl;
 				}
+				cout << "Lives: " << pLives;
+				cout << endl;
 				break;
 
 				// Player moving left
 			case 'A':
 			case 'a':
 				cout << " < ";
+				if (easyBTS[pY][pX - 1] == "&") {
+					pLives--;
+					pX = 2;
+					pY = 2;
+				}
 				if (easyMap[pY][pX - 1] == "X") {
 				}
 				else {
@@ -265,12 +328,19 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 					cout << endl;
 
 				}
+				cout << "Lives: " << pLives;
+				cout << endl;
 				break;
 
 				// Player moving right
 			case 'D':
 			case 'd':
 				cout << " > ";
+				if (easyBTS[pY][pX + 1] == "&") {
+					pLives--;
+					pX = 2;
+					pY = 2;
+				}
 				if (easyMap[pY][pX + 1] == "X") {
 				}
 				else {
@@ -297,12 +367,19 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 					cout << endl;
 
 				}
+				cout << "Lives: " << pLives;
+				cout << endl;
 				break;
 
 				// Player moving down
 			case 'S':
 			case 's':
 				cout << " V ";
+				if (easyBTS[pY + 1][pX] == "&") {
+					pLives--;
+					pX = 2;
+					pY = 2;
+				}
 				if (easyMap[pY + 1][pX] == "X") {
 				}
 				else {
@@ -328,10 +405,15 @@ void playerMovement(int selection, string easyMap[11][12], string medMap[16][16]
 					cout << endl;
 
 				}
+				cout << "Lives: " << pLives;
+				cout << endl;
 				break;
 
+
 			}
+
 		} while (true);
+
 	}
 	if (selection == 2) {
 		cout << "Use WASD to move up, down, left, or right." << endl;
