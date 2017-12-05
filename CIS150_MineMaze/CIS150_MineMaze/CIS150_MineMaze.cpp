@@ -11,16 +11,17 @@
 #include <windows.h>
 #include <stdlib.h> // www.cplusplus.com/reference/cstdlib/rand/
 #include <time.h> // www.cplusplus.com/reference/cstdlib/rand/
-
-
-
 using namespace std;
-// GLOBAL VARIABLE
 
 int pX = 2; // Column Position
 int pY = 2; // Row Position
 string easyMap;
 string medMap;
+string eventName;
+
+
+// Evan: New functions for displaying the maps and handling events (such as running into a mine, for instance)
+void displayMap(string easyMap[11][12], int pX, int pY, int pLives);
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -33,43 +34,15 @@ void displayStartup() {
 	cout << endl;
 	cout << "======================================================================================================================" << endl;
 }
+
 void easyMapCode();
 void MediumMapCode();
-
-
-
-
-
-int MedMinePlacement(int, int);
 void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int xAxis, int yAxis, int pLives);
-
-
-
 void clear();
 
 int main()
 {
 
-
-	// Mine placer
-
-
-
-	
-
-	// ======================================
-	// Map variables
-	// ======================================
-	string easyLevel = ""; // Placeholders for later.
-	// 10 x 10 Grid
-	string hardLevel = "";
-	// 25 x 25 Grid
-
-	// ======================================
-	// Player variables
-	// ======================================
-	int lives; // Placeholder for later, will depend on the level.
-	int moves; // Placeholder for later, limited amount of moves depending on the level.
 	int selection;
 
 	// Start up menu;
@@ -98,10 +71,6 @@ int main()
 		return 0;
 
 }
-
-
-
-
 
 void easyMapCode() {
 	// Code for Easy Level
@@ -221,21 +190,12 @@ void MediumMapCode()
 
 
 }
-// Notes: I made a clear() function that will clear the screen so we don't have to type out system("cls") everytime we want to clear the screen.
+
 void clear() {
 	system("cls");
 }
 
 
-int MedMinePlacement(int row, int col)
-{
-	int i = 0;
-	if (row < 16)
-	{
-		// i need a randomize number function
-	}
-	return i;
-}
 
 void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int pX, int pY, int pLives)
 {
@@ -263,35 +223,8 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 				else {
 					pY--;
 				}
-				// Mine grid
-
- 
 				system("cls");
-				for (int row = 0; row < 11; row++)
-				{
-					int xX = 0, xY = 0;
-					for (int col = 0; col < 12; col++)
-					{
-						if (easyMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << easyMap[row][col] << " ";
-							if (col > 1 && row > 1 && col < 10 && row < 10) {
-								xX = row;
-								xY = col;
-							}
-						}
-
-					}
-					cout << endl;
-				}
-				cout << "Lives: " << pLives;
-				cout << endl;
+				displayMap(easyMap, pX, pY, pLives);
 				break;
 
 				// Player moving left
@@ -309,27 +242,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pX--;
 				}
 				system("cls");
-				for (int row = 0; row < 11; row++)
-				{
-					for (int col = 0; col < 12; col++)
-					{
-						if (easyMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << easyMap[row][col] << " ";
-						}
-
-					}
-					cout << endl;
-
-				}
-				cout << "Lives: " << pLives;
-				cout << endl;
+				displayMap(easyMap, pX, pY, pLives);
 				break;
 
 				// Player moving right
@@ -348,27 +261,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 				}
 
 				system("cls");
-				for (int row = 0; row < 11; row++)
-				{
-					for (int col = 0; col < 12; col++)
-					{
-						if (easyMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << easyMap[row][col] << " ";
-						}
-
-					}
-					cout << endl;
-
-				}
-				cout << "Lives: " << pLives;
-				cout << endl;
+				displayMap(easyMap, pX, pY, pLives);
 				break;
 
 				// Player moving down
@@ -386,27 +279,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pY++;
 				}
 				system("cls");
-				for (int row = 0; row < 11; row++)
-				{
-					for (int col = 0; col < 12; col++)
-					{
-						if (easyMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << easyMap[row][col] << " ";
-						}
-
-					}
-					cout << endl;
-
-				}
-				cout << "Lives: " << pLives;
-				cout << endl;
+				displayMap(easyMap, pX, pY, pLives);
 				break;
 
 
@@ -568,4 +441,35 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 
 }
 
+
+void displayMap(string easyMap[11][12], int pX, int pY, int pLives) {
+
+	for (int row = 0; row < 11; row++)
+	{
+		int xX = 0, xY = 0;
+		for (int col = 0; col < 12; col++)
+		{
+			if (easyMap[row][col] == " ") {
+			}
+			if (col == pX && row == pY) {
+				cout << "O";
+				cout << " ";
+			}
+
+			else {
+				cout << easyMap[row][col] << " ";
+				if (col > 1 && row > 1 && col < 10 && row < 10) {
+					xX = row;
+					xY = col;
+				}
+			}
+
+		}
+		cout << endl;
+	}
+	cout << "Lives: " << pLives;
+	cout << endl;
+
+
+}
 
