@@ -25,7 +25,7 @@ string eventName;
 void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, int pLives, int pmoves, int selection);
 
 void displayStartup() {
-	cout << "======================================================================================================================" << endl;
+	cout << "============================================================================================================" << endl;
 	cout << endl;
 	cout << endl;
 	cout << endl;
@@ -33,11 +33,15 @@ void displayStartup() {
 	cout << endl;
 	cout << endl;
 	cout << endl;
-	cout << "======================================================================================================================" << endl;
+	cout << "============================================================================================================" << endl;
 }
-
+// Evan
+//========
 void easyMapCode();
+// Justin
+//========
 void MediumMapCode();
+
 void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int xAxis, int yAxis, int pLives, int pmoves );
 void clear();
 void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, int selection);
@@ -47,21 +51,13 @@ int main()
 	system("cls");
 
 	int selection;
+	
 
 	// Start up menu;
 	displayStartup();
-	// Stolen from Blackboard file
-	HWND console = GetConsoleWindow();
-	RECT r;
-	GetWindowRect(console, &r);
-	int width = 1240;
-	int height = 1100;
-	int left = r.left;
-	int right = r.right;
-	MoveWindow(console, left, right, height, width, TRUE);
 
-
-	//Intro to the game
+	// Justin
+	//========
 	cout << "Hello welcome to The Mine Maze\n";
 	cout << "Select the Level you want to Play\n";
 	cout << "1. Easy\n";
@@ -88,6 +84,9 @@ int main()
 void easyMapCode() {
 	// Code for Easy Level
 
+
+	// Evan
+	//========
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -188,7 +187,8 @@ void MediumMapCode()
 {
 
 
-
+	// Justin
+	//========
 
 	// Map for the medium level
 	const int medRow = 16, medCol = 16;
@@ -300,7 +300,8 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 
 	while (5 == 5) {
 
-
+	// Evan
+	//========
 	if (selection == 1) {
 		cout << "Use WASD to move up, down, left, or right." << endl;
 		char move = 0;
@@ -434,6 +435,8 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 		} while (selection == 1);
 
 	}
+	// Justin
+	//========
 	if (selection == 2) 
 	{
 		cout << "Use WASD to move up, down, left, or right." << endl;
@@ -579,6 +582,8 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
+	// Evan
+	//========
 	if (selection == 1)
 	{
 		for (int row = 0; row < 11; row++)
@@ -602,16 +607,14 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 					else {
 						cout << easyMap[row][col] << " ";
 					}
-					if (col > 1 && row > 1 && col < 10 && row < 10) {
-						xX = row;
-						xY = col;
-					}
 				}
 
 			}
 			cout << endl;
 		}
 	}
+	// Justin
+	//========
 	if (selection == 2)
 	{
 		for (int row = 0; row < 16; row++)
@@ -635,10 +638,6 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 					else {
 						cout << medMap[row][col] << " ";
 					}
-					if (col > 1 && row > 1 && col < 10 && row < 10) {
-						xX = row;
-						xY = col;
-					}
 				}
 
 			}
@@ -646,20 +645,22 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 		}
 
 	}
-	cout << "Lives: " << pLives;
+	// Justin
+	//========
+	cout << "X Lives: " << pLives;
 	cout << endl;
-	cout << "Moves: " << pmoves;
-	cout << endl;
+	cout << "X Moves: " << pmoves << endl;
 
 
 }
 
 void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, int selection) {
-	cout << endl;
 
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console, 2);
+	// Evan
+	//========
 	if (selection == 1)
 	{
 		for (int i = 0; i < 11; i++) {
@@ -681,6 +682,8 @@ void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, 
 
 		}
 	}
+	// Justin
+	//========
 	if (selection == 2)
 	{
 		for (int i = 0; i < 16; i++) {

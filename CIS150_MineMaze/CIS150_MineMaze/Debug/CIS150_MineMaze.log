@@ -1,5 +1,5 @@
 ﻿  CIS150_MineMaze.cpp
-c:\users\jvine\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(128): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\jvine\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(232): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  CIS150_MineMaze.vcxproj -> C:\Users\jvine\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.exe
-  CIS150_MineMaze.vcxproj -> C:\Users\jvine\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.pdb (Full PDB)
+c:\users\emanzagol\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(125): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\emanzagol\documents\github\mine-maze\cis150_minemaze\cis150_minemaze\cis150_minemaze.cpp(229): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  CIS150_MineMaze.vcxproj -> C:\Users\emanzagol\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.exe
+  CIS150_MineMaze.vcxproj -> C:\Users\emanzagol\Documents\GitHub\Mine-Maze\CIS150_MineMaze\Debug\CIS150_MineMaze.pdb (Full PDB)
