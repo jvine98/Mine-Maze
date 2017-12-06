@@ -13,8 +13,8 @@
 #include <time.h> // www.cplusplus.com/reference/cstdlib/rand/
 using namespace std;
 
-int pX = 2; // Column Position
-int pY = 2; // Row Position
+int pX = 1; // Column Position
+int pY = 1; // Row Position
 string easyMap;
 string medMap;
 string eventName;
@@ -22,7 +22,7 @@ string eventName;
 
 
 // Evan: New functions for displaying the maps and handling events (such as running into a mine, for instance)
-void displayMap(string easyMap[11][12], int pX, int pY, int pLives);
+void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, int pLives, int pmoves, int selection);
 
 void displayStartup() {
 	cout << "======================================================================================================================" << endl;
@@ -38,9 +38,9 @@ void displayStartup() {
 
 void easyMapCode();
 void MediumMapCode();
-void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int xAxis, int yAxis, int pLives);
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int xAxis, int yAxis, int pLives, int pmoves );
 void clear();
-void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY);
+void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, int selection);
 
 int main()
 {
@@ -50,9 +50,15 @@ int main()
 
 	// Start up menu;
 	displayStartup();
-
-
-	
+	// Stolen from Blackboard file
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r);
+	int width = 1240;
+	int height = 1100;
+	int left = r.left;
+	int right = r.right;
+	MoveWindow(console, left, right, height, width, TRUE);
 
 
 	//Intro to the game
@@ -163,7 +169,7 @@ void easyMapCode() {
 	for (int i = 0; i < 11; i++) {
 
 		for (int j = 0; j < 12; j++) {
-			cout << easyBTS[i][j] << " ";
+			cout << easyMap[i][j] << " ";
 
 		}
 		cout << endl;
@@ -175,7 +181,7 @@ void easyMapCode() {
 // Source: http://www.cplusplus.com/forum/general/55170/
 string medMap[16][16];
 string medBTS[16][16];
-playerMovement(1, easyMap, easyBTS, medMap, medBTS, 2, 2, 10);
+playerMovement(1, easyMap, easyBTS, medMap, medBTS, 1, 1, 10, 40);
 }
 
 void MediumMapCode()
@@ -188,20 +194,20 @@ void MediumMapCode()
 	const int medRow = 16, medCol = 16;
 	string medMap[medRow][medCol] = {
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", "X", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", "X", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", "X", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", "X", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X", "X", "X", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", "X", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "P", "X" },
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 	};
 
@@ -220,9 +226,64 @@ void MediumMapCode()
 	cout << "=================================================================================================\n";
 	cout << endl;
 	//The Medium Maze
+
+	int placeMine;
+	int mineCount = 0;
+	srand(time(NULL));
+
+	for (int i = 0; i < 16; i++) {
+
+		for (int j = 0; j < 16; j++) {
+
+
+
+			placeMine = rand() % 7;
+
+			if (placeMine == 0) {
+				if (medMap[i][j] == "P") {
+					medBTS[i][j] = "P";
+				}
+				else if (medMap[i][j] == "X") {
+					medBTS[i][j] = "X";
+				}
+				else {
+					medBTS[i][j] = "&";
+					mineCount++;
+				}
+
+			}
+			else {
+
+				if (medMap[i][j] == "P") {
+					medBTS[i][j] = "P";
+				}
+				else if (medMap[i][j] == "X") {
+					medBTS[i][j] = "X";
+				}
+				else {
+					medBTS[i][j] = ".";
+				}
+
+			}
+
+		}
+
+	}
+
+	for (int i = 0; i < 16; i++) {
+
+		for (int j = 0; j < 16; j++) {
+			cout << medMap[i][j] << " ";
+
+		}
+		cout << endl;
+
+	}
+
+
 	string easyMap[11][12];
 	string easyBTS[11][12];
-	playerMovement(2, easyMap, easyBTS, medMap, medBTS, 1, 1, 5);
+	playerMovement(2, easyMap, easyBTS, medMap, medBTS, 1, 1, 5, 75);
 
 
 
@@ -234,7 +295,7 @@ void clear() {
 
 
 
-void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int pX, int pY, int pLives)
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int pX, int pY, int pLives, int pmoves)
 {
 
 	while (5 == 5) {
@@ -245,263 +306,266 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 		char move = 0;
 		do
 		{
-			move = _getch();
-
-			switch (move)
+			if (pLives != 0 && pmoves != 0)
 			{
-				// Player moving upwards
-			case 'W':
-			case 'w':
-				cout << " ^ ";
-				if (easyBTS[pY - 1][pX] == "&") {
-					pLives--;
-					pX = 2;
-					pY = 2;
-				}
-				if (easyMap[pY - 1][pX] == "P") {
+				move = _getch();
+
+				switch (move)
+				{
+					// Player moving upwards
+				case 'W':
+				case 'w':
+					cout << " ^ ";
+					if (easyBTS[pY - 1][pX] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (easyMap[pY - 1][pX] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (easyMap[pY - 1][pX] == "X") {
+					}
+					else {
+						pY--;
+						pmoves--;
+					}
 					system("cls");
-					cout << "Level complete." << endl;
-					system("pause");
-					main();
-				}
-				if (easyMap[pY - 1][pX] == "X") {
-				}
-				else {
-					pY--;
-				}
-				system("cls");
-				displayMap(easyMap, pX, pY, pLives);
-				displayGrid(easyBTS, medBTS, pX, pY);
-				break;
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medMap, pX, pY, selection);
+					break;
 
-				// Player moving left
-			case 'A':
-			case 'a':
-				cout << " < ";
-				if (easyBTS[pY][pX - 1] == "&") {
-					pLives--;
-					pX = 2;
-					pY = 2;
-				}
-				if (easyMap[pY][pX - 1] == "P") {
+					// Player moving left
+				case 'A':
+				case 'a':
+					cout << " < ";
+					if (easyBTS[pY][pX - 1] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (easyMap[pY][pX - 1] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (easyMap[pY][pX - 1] == "X") {
+					}
+					else {
+						pX--;
+						pmoves--;
+					}
 					system("cls");
-					cout << "Level complete." << endl;
-					system("pause");
-					main();
-				}		
-				if (easyMap[pY][pX - 1] == "X") {
-				}
-				else {
-					pX--;
-				}
-				system("cls");
-				displayMap(easyMap, pX, pY, pLives);
-				displayGrid(easyBTS, medBTS, pX, pY);
-				break;
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medMap, pX, pY, selection);
+					break;
 
-				// Player moving right
-			case 'D':
-			case 'd':
-				cout << " > ";
-				if (easyBTS[pY][pX + 1] == "&") {
-					pLives--;
-					pX = 2;
-					pY = 2;
-				}
-				if (easyMap[pY][pX + 1] == "P") {
+					// Player moving right
+				case 'D':
+				case 'd':
+					cout << " > ";
+					if (easyBTS[pY][pX + 1] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (easyMap[pY][pX + 1] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (easyMap[pY][pX + 1] == "X") {
+					}
+					else {
+						pX++;
+						pmoves--;
+					}
+
 					system("cls");
-					cout << "Level complete." << endl;
-					system("pause");
-					main();
-				}
-				if (easyMap[pY][pX + 1] == "X") {
-				}
-				else {
-					pX++;
-				}
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medMap, pX, pY, selection);
+					break;
 
-				system("cls");
-				displayMap(easyMap, pX, pY, pLives);
-				displayGrid(easyBTS, medBTS, pX, pY);
-				break;
-
-				// Player moving down
-			case 'S':
-			case 's':
-				cout << " V ";
-				if (easyBTS[pY + 1][pX] == "&") {
-					pLives--;
-					pX = 2;
-					pY = 2;
-				}
-				if (easyMap[pY + 1][pX] == "P") {
+					// Player moving down
+				case 'S':
+				case 's':
+					cout << " V ";
+					if (easyBTS[pY + 1][pX] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (easyMap[pY + 1][pX] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (easyMap[pY + 1][pX] == "X") {
+					}
+					else {
+						pY++;
+						pmoves--;
+					}
 					system("cls");
-					cout << "Level complete." << endl;
-					system("pause");
-					main();
-				}
-				if (easyMap[pY + 1][pX] == "X") {
-				}
-				else {
-					pY++;
-				}
-				system("cls");
-				displayMap(easyMap, pX, pY, pLives);
-				displayGrid(easyBTS, medBTS, pX, pY);
-				break;
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medMap, pX, pY, selection);
+					break;
 
 
+				}
 			}
-
+			if (pLives == 0 || pmoves == 0)
+			{
+				cout << "You suck!\n";
+				system("pause");
+				clear();
+				main();
+			}
 		} while (selection == 1);
 
 	}
-	if (selection == 2) {
+	if (selection == 2) 
+	{
 		cout << "Use WASD to move up, down, left, or right." << endl;
 		char move = 0;
 		do
 		{
-			move = _getch();
-
-			switch (move)
+			if (pLives != 0 && pmoves != 0)
 			{
-				// Player moving upwards			switch (move)
+				move = _getch();
+
+				switch (move)
+				{
 					// Player moving upwards
-			case 'W':
-			case 'w':
-				cout << " ^ ";
-				if (medMap[pY - 1][pX] == "X") {
-				}
-				else {
-					pY--;
-				}
-				system("cls");
-				for (int row = 0; row < 16; row++)
-				{
-					int xX = 0, xY = 0;
-					for (int col = 0; col < 16; col++)
-					{
-						if (medMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << medMap[row][col] << " ";
-							if (col > 1 && row > 1 && col < 10 && row < 10) {
-								xX = row;
-								xY = col;
-							}
-						}
-
+				case 'W':
+				case 'w':
+					cout << " ^ ";
+					if (medBTS[pY - 1][pX] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
 					}
-					cout << endl;
-
-				}
-				break;
-
-				// Player moving left
-			case 'A':
-			case 'a':
-				cout << " < ";
-				if (medMap[pY][pX - 1] == "X") {
-				}
-				else {
-					pX--;
-				}
-				system("cls");
-				for (int row = 0; row < 16; row++)
-				{
-					for (int col = 0; col < 16; col++)
-					{
-						if (medMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << medMap[row][col] << " ";
-						}
-
+					if (medMap[pY - 1][pX] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
 					}
-					cout << endl;
-
-				}
-				break;
-
-				// Player moving right
-			case 'D':
-			case 'd':
-				cout << " > ";
-				if (medMap[pY][pX + 1] == "X") {
-				}
-				else {
-					pX++;
-				}
-
-				system("cls");
-				for (int row = 0; row < 16; row++)
-				{
-					for (int col = 0; col < 16; col++)
-					{
-						if (medMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << medMap[row][col] << " ";
-						}
-
+					if (medMap[pY - 1][pX] == "X") {
 					}
-					cout << endl;
-
-				}
-				break;
-
-				// Player moving down
-			case 'S':
-			case 's':
-				cout << " V ";
-				if (medMap[pY + 1][pX] == "X") {
-				}
-				else {
-					pY++;
-				}
-				system("cls");
-				for (int row = 0; row < 16; row++)
-				{
-					for (int col = 0; col < 16; col++)
-					{
-						if (medMap[row][col] == " ") {
-						}
-						if (col == pX && row == pY) {
-							cout << "O";
-							cout << " ";
-						}
-
-						else {
-							cout << medMap[row][col] << " ";
-						}
-
+					else {
+						pY--;
+						pmoves--;
 					}
-					cout << endl;
+					system("cls");
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medBTS, pX, pY, selection);
+					break;
+
+					// Player moving left
+				case 'A':
+				case 'a':
+					cout << " < ";
+					if (medBTS[pY][pX - 1] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (medMap[pY][pX - 1] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (medMap[pY][pX - 1] == "X") {
+					}
+					else {
+						pX--;
+						pmoves--;
+					}
+					system("cls");
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medBTS, pX, pY, selection);
+					break;
+
+					// Player moving right
+				case 'D':
+				case 'd':
+					cout << " > ";
+					if (medBTS[pY][pX + 1] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (medMap[pY][pX + 1] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (medMap[pY][pX + 1] == "X") {
+					}
+					else {
+						pX++;
+						pmoves--;
+					}
+
+					system("cls");
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medBTS, pX, pY, selection);
+					break;
+
+					// Player moving down
+				case 'S':
+				case 's':
+					cout << " V ";
+					if (medBTS[pY + 1][pX] == "&") {
+						pLives--;
+						pmoves--;
+						pX = 1;
+						pY = 1;
+					}
+					if (medMap[pY + 1][pX] == "P") {
+						system("cls");
+						cout << "Level complete." << endl;
+						system("pause");
+						main();
+					}
+					if (medMap[pY + 1][pX] == "X") {
+					}
+					else {
+						pY++;
+						pmoves--;
+					}
+					system("cls");
+					displayMap(easyMap, medMap, pX, pY, pLives, pmoves, selection);
+					displayGrid(easyBTS, medBTS, pX, pY, selection);
+					break;
+
 
 				}
-				break;
-
-				
 			}
-
-			// Player moving down
-
-		} while (true);
+			if (pLives == 0 || pmoves == 0)
+			{
+				cout << "You suck!\n";
+				system("pause");
+				clear();
+				main();
+			}
+		} while (selection == 2);
 
 
 
@@ -511,73 +575,134 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 }
 
 
-void displayMap(string easyMap[11][12], int pX, int pY, int pLives) {
+void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, int pLives, int pmoves, int selection) {
 
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	for (int row = 0; row < 11; row++)
+	if (selection == 1)
 	{
-		int xX = 0, xY = 0;
-		for (int col = 0; col < 12; col++)
+		for (int row = 0; row < 11; row++)
 		{
-			if (easyMap[row][col] == " ") {
-			}
-			if (col == pX && row == pY) {
-				cout << "O";
-				cout << " ";
-			}
-
-			else {
-				if (easyMap[row][col] == "P") {
-					SetConsoleTextAttribute(console, 12);
-					cout << easyMap[row][col] << " ";
-					SetConsoleTextAttribute(console, 7);
+			int xX = 0, xY = 0;
+			for (int col = 0; col < 12; col++)
+			{
+				if (easyMap[row][col] == " ") {
 				}
+				if (col == pX && row == pY) {
+					cout << "O";
+					cout << " ";
+				}
+
 				else {
-				cout << easyMap[row][col] << " ";
+					if (easyMap[row][col] == "P") {
+						SetConsoleTextAttribute(console, 12);
+						cout << easyMap[row][col] << " ";
+						SetConsoleTextAttribute(console, 7);
+					}
+					else {
+						cout << easyMap[row][col] << " ";
+					}
+					if (col > 1 && row > 1 && col < 10 && row < 10) {
+						xX = row;
+						xY = col;
+					}
 				}
-				if (col > 1 && row > 1 && col < 10 && row < 10) {
-					xX = row;
-					xY = col;
-				}
-			}
 
+			}
+			cout << endl;
 		}
-		cout << endl;
+	}
+	if (selection == 2)
+	{
+		for (int row = 0; row < 16; row++)
+		{
+			int xX = 0, xY = 0;
+			for (int col = 0; col < 16; col++)
+			{
+				if (medMap[row][col] == " ") {
+				}
+				if (col == pX && row == pY) {
+					cout << "O";
+					cout << " ";
+				}
+
+				else {
+					if (medMap[row][col] == "P") {
+						SetConsoleTextAttribute(console, 12);
+						cout << medMap[row][col] << " ";
+						SetConsoleTextAttribute(console, 7);
+					}
+					else {
+						cout << medMap[row][col] << " ";
+					}
+					if (col > 1 && row > 1 && col < 10 && row < 10) {
+						xX = row;
+						xY = col;
+					}
+				}
+
+			}
+			cout << endl;
+		}
+
 	}
 	cout << "Lives: " << pLives;
+	cout << endl;
+	cout << "Moves: " << pmoves;
 	cout << endl;
 
 
 }
 
-void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY) {
+void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, int selection) {
 	cout << endl;
 
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console, 2);
-	for (int i = 0; i < 11; i++) {
+	if (selection == 1)
+	{
+		for (int i = 0; i < 11; i++) {
 
-		for (int j = 0; j < 11; j++) {
-			if (easyBTS[i][j] == ".") {
+			for (int j = 0; j < 11; j++) {
+				if (easyBTS[i][j] == ".") {
+				}
+				if (j == pX && i == pY) {
+					cout << "O";
+					cout << " ";
+				}
+				else {
+					cout << easyBTS[i][j] << " ";
+				}
+
+
 			}
-			if (j == pX && i == pY) {
-				cout << "O";
-				cout << " ";
-			}
-			else {
-				cout << easyBTS[i][j] << " ";
-			}
-			
+			cout << endl;
 
 		}
-		cout << endl;
+	}
+	if (selection == 2)
+	{
+		for (int i = 0; i < 16; i++) {
 
+			for (int j = 0; j < 16; j++) {
+				if (medBTS[i][j] == ".") {
+				}
+				if (j == pX && i == pY) {
+					cout << "O";
+					cout << " ";
+				}
+				else {
+					cout << medBTS[i][j] << " ";
+				}
+
+
+			}
+			cout << endl;
+
+		}
 	}
 	SetConsoleTextAttribute(console, 7);
 
 
 }
-
