@@ -20,6 +20,7 @@ string medMap;
 string eventName;
 
 
+
 // Evan: New functions for displaying the maps and handling events (such as running into a mine, for instance)
 void displayMap(string easyMap[11][12], int pX, int pY, int pLives);
 
@@ -37,16 +38,22 @@ void displayStartup() {
 
 void easyMapCode();
 void MediumMapCode();
-void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int xAxis, int yAxis, int pLives);
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int xAxis, int yAxis, int pLives);
 void clear();
+void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY);
 
 int main()
 {
+	system("cls");
 
 	int selection;
 
 	// Start up menu;
 	displayStartup();
+
+
+	
+
 
 	//Intro to the game
 	cout << "Hello welcome to The Mine Maze\n";
@@ -75,6 +82,9 @@ int main()
 void easyMapCode() {
 	// Code for Easy Level
 
+	HANDLE  console;
+	console = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	clear();
 	cout << "=================================================================================================\n";
 	cout << "The Rules for the Easy Level are as follow:\n";
@@ -88,19 +98,21 @@ void easyMapCode() {
 	cout << "=================================================================================================\n";
 
 
+
+
 	const int easyRow = 11, easyCol = 12;
 	string easyMap[easyRow][easyCol] = {
-		{ " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
-		{ "1", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-		{ "2", "X", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
-		{ "3", "X", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
-		{ "4", "X", " ", " ", "X", "X", " ", " ", " ", "X", "X" },
-		{ "5", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "6", "X", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
-		{ "7", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "8", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "9", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "0", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
+		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
+		{ "X", " ", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", "X", "X", " ", " ", " ", "X", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", "P", "X" },
+		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
 	};
 
 	string easyBTS[easyRow][easyCol];
@@ -118,11 +130,30 @@ void easyMapCode() {
 			placeMine = rand() % 8;
 
 			if (placeMine == 0) {
-				easyBTS[i][j] = "&";
-				mineCount++;
+				if (easyMap[i][j] == "P") {
+					easyBTS[i][j] = "P";
+				}
+				else if (easyMap[i][j] == "X") {
+					easyBTS[i][j] = "X";
+				}
+				else {
+					easyBTS[i][j] = "&";
+					mineCount++;
+				}
+
 			}
 			else {
-				easyBTS[i][j] = ".";
+
+				if (easyMap[i][j] == "P") {
+					easyBTS[i][j] = "P";
+				}
+				else if (easyMap[i][j] == "X") {
+					easyBTS[i][j] = "X";
+				}
+				else {
+					easyBTS[i][j] = ".";
+				}
+				
 			}
 
 		}
@@ -140,14 +171,18 @@ void easyMapCode() {
 	}
 
 
-	// Registering Movement
-	// Source: http://www.cplusplus.com/forum/general/55170/
-	string medMap[16][16];
-	playerMovement(1, easyMap, easyBTS, medMap, 2, 2, 10);
+// Registering Movement
+// Source: http://www.cplusplus.com/forum/general/55170/
+string medMap[16][16];
+string medBTS[16][16];
+playerMovement(1, easyMap, easyBTS, medMap, medBTS, 2, 2, 10);
 }
 
 void MediumMapCode()
 {
+
+
+
 
 	// Map for the medium level
 	const int medRow = 16, medCol = 16;
@@ -170,6 +205,8 @@ void MediumMapCode()
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 	};
 
+	string medBTS[medRow][medCol];
+
 	// Rules for the medium level
 	cout << "=================================================================================================\n";
 	cout << "The Rules for the Medium Level are as follow:\n";
@@ -185,7 +222,7 @@ void MediumMapCode()
 	//The Medium Maze
 	string easyMap[11][12];
 	string easyBTS[11][12];
-	playerMovement(2, easyMap, easyBTS, medMap, 1, 1, 5);
+	playerMovement(2, easyMap, easyBTS, medMap, medBTS, 1, 1, 5);
 
 
 
@@ -197,8 +234,11 @@ void clear() {
 
 
 
-void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], int pX, int pY, int pLives)
+void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int pX, int pY, int pLives)
 {
+
+	while (5 == 5) {
+
 
 	if (selection == 1) {
 		cout << "Use WASD to move up, down, left, or right." << endl;
@@ -218,6 +258,12 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pX = 2;
 					pY = 2;
 				}
+				if (easyMap[pY - 1][pX] == "P") {
+					system("cls");
+					cout << "Level complete." << endl;
+					system("pause");
+					main();
+				}
 				if (easyMap[pY - 1][pX] == "X") {
 				}
 				else {
@@ -225,6 +271,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 				}
 				system("cls");
 				displayMap(easyMap, pX, pY, pLives);
+				displayGrid(easyBTS, medBTS, pX, pY);
 				break;
 
 				// Player moving left
@@ -236,6 +283,12 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pX = 2;
 					pY = 2;
 				}
+				if (easyMap[pY][pX - 1] == "P") {
+					system("cls");
+					cout << "Level complete." << endl;
+					system("pause");
+					main();
+				}		
 				if (easyMap[pY][pX - 1] == "X") {
 				}
 				else {
@@ -243,6 +296,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 				}
 				system("cls");
 				displayMap(easyMap, pX, pY, pLives);
+				displayGrid(easyBTS, medBTS, pX, pY);
 				break;
 
 				// Player moving right
@@ -254,6 +308,12 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pX = 2;
 					pY = 2;
 				}
+				if (easyMap[pY][pX + 1] == "P") {
+					system("cls");
+					cout << "Level complete." << endl;
+					system("pause");
+					main();
+				}
 				if (easyMap[pY][pX + 1] == "X") {
 				}
 				else {
@@ -262,6 +322,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 
 				system("cls");
 				displayMap(easyMap, pX, pY, pLives);
+				displayGrid(easyBTS, medBTS, pX, pY);
 				break;
 
 				// Player moving down
@@ -273,6 +334,12 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 					pX = 2;
 					pY = 2;
 				}
+				if (easyMap[pY + 1][pX] == "P") {
+					system("cls");
+					cout << "Level complete." << endl;
+					system("pause");
+					main();
+				}
 				if (easyMap[pY + 1][pX] == "X") {
 				}
 				else {
@@ -280,12 +347,13 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 				}
 				system("cls");
 				displayMap(easyMap, pX, pY, pLives);
+				displayGrid(easyBTS, medBTS, pX, pY);
 				break;
 
 
 			}
 
-		} while (true);
+		} while (selection == 1);
 
 	}
 	if (selection == 2) {
@@ -438,11 +506,15 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 
 
 	}
+	}
 
 }
 
 
 void displayMap(string easyMap[11][12], int pX, int pY, int pLives) {
+
+	HANDLE  console;
+	console = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	for (int row = 0; row < 11; row++)
 	{
@@ -457,7 +529,14 @@ void displayMap(string easyMap[11][12], int pX, int pY, int pLives) {
 			}
 
 			else {
+				if (easyMap[row][col] == "P") {
+					SetConsoleTextAttribute(console, 12);
+					cout << easyMap[row][col] << " ";
+					SetConsoleTextAttribute(console, 7);
+				}
+				else {
 				cout << easyMap[row][col] << " ";
+				}
 				if (col > 1 && row > 1 && col < 10 && row < 10) {
 					xX = row;
 					xY = col;
@@ -469,6 +548,35 @@ void displayMap(string easyMap[11][12], int pX, int pY, int pLives) {
 	}
 	cout << "Lives: " << pLives;
 	cout << endl;
+
+
+}
+
+void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY) {
+	cout << endl;
+
+	HANDLE  console;
+	console = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console, 2);
+	for (int i = 0; i < 11; i++) {
+
+		for (int j = 0; j < 11; j++) {
+			if (easyBTS[i][j] == ".") {
+			}
+			if (j == pX && i == pY) {
+				cout << "O";
+				cout << " ";
+			}
+			else {
+				cout << easyBTS[i][j] << " ";
+			}
+			
+
+		}
+		cout << endl;
+
+	}
+	SetConsoleTextAttribute(console, 7);
 
 
 }
