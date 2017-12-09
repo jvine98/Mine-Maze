@@ -15,9 +15,11 @@ using namespace std;
 
 int pX = 1; // Column Position
 int pY = 1; // Row Position
+bool isAdmin = false;
 string easyMap;
 string medMap;
 string eventName;
+
 
 
 
@@ -67,13 +69,58 @@ int main()
 	// CIN THE SELECTION
 	cin >> selection;
 	cout << endl;
+	string pass = "";
 	if (selection == 1) 
 	{
-		easyMapCode();
+		
+		while (pass != "" || pass != "123" || pass != "SKIP") {
+
+			if (isAdmin) {
+				easyMapCode();
+			}
+			else {
+
+				cout << "Enter admin password or type SKIP to skip: ";
+				cin >> pass;
+				if (pass == "123" && isAdmin == false) {
+					isAdmin = true;
+					easyMapCode();
+				}
+				else if (pass == "SKIP") {
+					easyMapCode();
+				}
+
+			}
+
+		}
+
+		
 	}
 	else if (selection == 2)
 	{
-		MediumMapCode();
+
+		while (pass != "" || pass != "123" || pass != "SKIP") {
+
+			if (isAdmin) {
+				MediumMapCode();
+			}
+			else {
+
+				cout << "Enter admin password or type SKIP to skip: ";
+				cin >> pass;
+				if (pass == "123" && isAdmin == false) {
+					isAdmin = true;
+					MediumMapCode();
+				}
+				else if (pass == "SKIP") {
+					MediumMapCode();
+				}
+
+			}
+
+		}
+
+
 	}
 
 		system("pause");
@@ -297,6 +344,8 @@ void clear() {
 
 void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12], string medMap[16][16], string medBTS[16][16], int pX, int pY, int pLives, int pmoves)
 {
+
+	int mineCounter = 0;
 
 	while (5 == 5) {
 
@@ -650,6 +699,7 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 	cout << "X Lives: " << pLives;
 	cout << endl;
 	cout << "X Moves: " << pmoves << endl;
+	
 
 
 }
@@ -659,50 +709,57 @@ void displayGrid(string easyBTS[11][12], string medBTS[16][16], int pX, int pY, 
 	HANDLE  console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console, 2);
-	// Evan
-	//========
-	if (selection == 1)
-	{
-		for (int i = 0; i < 11; i++) {
 
-			for (int j = 0; j < 11; j++) {
-				if (easyBTS[i][j] == ".") {
-				}
-				if (j == pX && i == pY) {
-					cout << "O";
-					cout << " ";
-				}
-				else {
-					cout << easyBTS[i][j] << " ";
-				}
+	if (isAdmin == false) {
 
-
-			}
-			cout << endl;
-
-		}
 	}
-	// Justin
-	//========
-	if (selection == 2)
-	{
-		for (int i = 0; i < 16; i++) {
+	else if (isAdmin == true) {
+	
+		// Evan
+		//========
+		if (selection == 1)
+		{
+			for (int i = 0; i < 11; i++) {
 
-			for (int j = 0; j < 16; j++) {
-				if (medBTS[i][j] == ".") {
-				}
-				if (j == pX && i == pY) {
-					cout << "O";
-					cout << " ";
-				}
-				else {
-					cout << medBTS[i][j] << " ";
-				}
+				for (int j = 0; j < 11; j++) {
+					if (easyBTS[i][j] == ".") {
+					}
+					if (j == pX && i == pY) {
+						cout << "O";
+						cout << " ";
+					}
+					else {
+						cout << easyBTS[i][j] << " ";
+					}
 
+
+				}
+				cout << endl;
 
 			}
-			cout << endl;
+		}
+		// Justin
+		//========
+		if (selection == 2)
+		{
+			for (int i = 0; i < 16; i++) {
 
+				for (int j = 0; j < 16; j++) {
+					if (medBTS[i][j] == ".") {
+					}
+					if (j == pX && i == pY) {
+						cout << "O";
+						cout << " ";
+					}
+					else {
+						cout << medBTS[i][j] << " ";
+					}
+
+
+				}
+				cout << endl;
+
+			}
 		}
 	}
 	SetConsoleTextAttribute(console, 7);
