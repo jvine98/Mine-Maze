@@ -59,7 +59,7 @@ int main()
 	cout << "Select the Level you want to Play\n";
 	cout << "1. Easy\n";
 	cout << "2. Medium\n";
-	cout << "==================================================================================================\n";
+	cout << "============================================================================================================\n";
 	cout << "Enter your selection: ";
 	// Cin the selection
 	cin >> selection;
@@ -131,9 +131,9 @@ void easyMapCode() {
 	cout << "The Rules for the Easy Level are as follow:\n";
 	cout << "You cant move more than 1 space \n";
 	cout << "You are only allowed to move vertically or horizontally\n";
-	cout << "There are 8 Mines randomly located throughout the map\n";
-	cout << "You step on a mine you lose a life you only have 2 for this level\n";
-	cout << "You have __ many moves. Use to many you Loose 1 life\n";
+	cout << "There is a 1 in 7 chance of a mine spawning in an open space\n";
+	cout << "You step on a mine you lose a life, you have 10 for this level\n";
+	cout << "You have 38 moves. If you use them all you lose 1 life\n";
 	cout << "If you make it to the end of the maze YOU WIN!!!\n";
 	cout << "Lastly have fun!\n";
 	cout << "=================================================================================================\n";
@@ -143,15 +143,15 @@ void easyMapCode() {
 	const int easyRow = 11, easyCol = 12;
 	string easyMap[easyRow][easyCol] = {
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
-		{ "X", " ", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
+		{ "X", "S", "S", " ", " ", " ", " ", " ", "X", " ", "X" },
+		{ "X", "S", "S", " ", " ", " ", " ", " ", "X", " ", "X" },
+		{ "X", "X", " ", " ", "X", " ", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", "X", "X", " ", " ", " ", "X", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", "X", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", "P", "X" },
+		{ "X", " ", "X", " ", " ", " ", " ", "X", " ", " ", "X" },
+		{ "X", " ", "X", " ", " ", " ", " ", "X", "X", " ", "X" },
+		{ "X", " ", "X", " ", "X", " ", " ", " ", "S", " ", "X" },
+		{ "X", " ", "X", " ", "X", " ", " ", "S", "P", "S", "X" },
+		{ "X", " ", " ", " ", " ", " ", " ", " ", "S", " ", "X" },
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" }
 	};
 
@@ -174,6 +174,9 @@ void easyMapCode() {
 			if (placeMine == 0) {
 				if (easyMap[i][j] == "P") {
 					easyBTS[i][j] = "P";
+				}
+				else if (easyMap[i][j] == "S") {
+					easyBTS[i][j] = "S";
 				}
 				else if (easyMap[i][j] == "X") {
 					easyBTS[i][j] = "X";
@@ -227,9 +230,9 @@ void MediumMapCode()
 	const int medRow = 16, medCol = 16;
 	string medMap[medRow][medCol] = {
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
-		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
+		{ "X", "S", "S", "S", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
+		{ "X", "S", "S", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
+		{ "X", "S", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", "X", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", "X", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", "X" },
@@ -239,8 +242,8 @@ void MediumMapCode()
 		{ "X", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", "X", " ", " ", "X", "X", " ", " ", " ", " ", "X" },
 		{ "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+		{ "X", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", "P", " ", "X" },
 		{ "X", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-		{ "X", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "P", "X" },
 		{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 	};
 
@@ -251,9 +254,9 @@ void MediumMapCode()
 	cout << "The Rules for the Medium Level are as follow:\n";
 	cout << "You cant move more than 1 space \n";
 	cout << "You are only allowed to move vertically or horizontally\n";
-	cout << "There are 8 Mines randomly located throughout the map\n";
-	cout << "You step on a mine you lose a life you only have 2 for this level\n";
-	cout << "You have __ many moves. Use to many you Loose 1 life\n";
+	cout << "There is a 1 in 7 chance of a mine spawning in an open space\n";
+	cout << "You step on a mine you lose a life, you have 5 for this level\n";
+	cout << "You have 75 moves. If you use them all you lose 1 life\n";
 	cout << "If you make it to the end of the maze YOU WIN!!!\n";
 	cout << "Lastly have fun!\n";
 	cout << "=================================================================================================\n";
@@ -273,6 +276,9 @@ void MediumMapCode()
 			if (placeMine == 0) {
 				if (medMap[i][j] == "P") {
 					medBTS[i][j] = "P";
+				}
+				else if (medMap[i][j] == "S") {
+					medBTS[i][j] = "S";
 				}
 				else if (medMap[i][j] == "X") {
 					medBTS[i][j] = "X";
@@ -444,7 +450,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 			}
 			if (pLives == 0 || pmoves == 0)
 			{
-				cout << "You suck!\n";
+				cout << "You lose!\n";
 				system("pause");
 				clear();
 				main();
@@ -580,7 +586,7 @@ void playerMovement(int selection, string easyMap[11][12], string easyBTS[11][12
 			}
 			if (pLives == 0 || pmoves == 0)
 			{
-				cout << "You suck!\n";
+				cout << "You lose!\n";
 				system("pause");
 				clear();
 				main();
@@ -618,6 +624,9 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 						cout << easyMap[row][col] << " ";
 						SetConsoleTextAttribute(console, 7);
 					}
+					else if (easyMap[row][col] == "S") {
+						cout << " " << " ";
+					}
 					else {
 						cout << easyMap[row][col] << " ";
 					}
@@ -648,6 +657,9 @@ void displayMap(string easyMap[11][12], string medMap[16][16], int pX, int pY, i
 						SetConsoleTextAttribute(console, 12);
 						cout << medMap[row][col] << " ";
 						SetConsoleTextAttribute(console, 7);
+					}
+					else if (medMap[row][col] == "S") {
+						cout << " " << " ";
 					}
 					else {
 						cout << medMap[row][col] << " ";
